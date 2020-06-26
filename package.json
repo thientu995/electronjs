@@ -1,0 +1,82 @@
+{
+  "displayName": "Electron Template Empty",
+  "name": "electron-template-empty",
+  "version": "0.0.0",
+  "description": "A minimal Electron application",
+  "homepage": "https://github.com/thientu995/electron-template-empty",
+  "repository": "https://github.com/thientu995/electron-template-empty",
+  "author": {
+    "name": "Nguyen Thien Tu",
+    "email": "thientu@t4vn.com"
+  },
+  "keywords": [
+    "Electron",
+    "Electron builder",
+    "Electron obfuscator",
+    "Electron template empty",
+    "demo"
+  ],
+  "license": "CC0-1.0",
+  "main": "main/startup",
+  "scripts": {
+    "start": "electron .",
+    "debug": "electron . --debug",
+    "pack": "electron-builder --dir",
+    "build": "electron-builder",
+    "build:win": "electron-builder --win",
+    "build:linux": "electron-builder --linux",
+    "build:mac": "electron-builder --mac",
+    "build:all": "electron-builder -wm",
+    "sys": "node scriptSys"
+  },
+  "postinstall": "electron-builder install-app-deps",
+  "build": {
+    "appId": "com.company.appName",
+    "productName": "Electron Template Empty",
+    "copyright": "Copyright © ${author}",
+    "artifactName": "${productName} ${version}.${ext}",
+    "asar": true,
+    "afterPack": "modules/scriptsInstall/obfuscator.js",
+    "mac": {
+      "identity": "Name (Key Machine)",
+      "category": "public.app-category.developer-tools",
+      "icon": "assets/icon/icon.icns",
+      "entitlements": "modules/scripts_intall/mac/entitlements.plist",
+      "entitlementsInherit": "modules/scripts_intall/mac/entitlements.plist",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "target": [
+        "dmg"
+      ]
+    },
+    "win": {
+      "icon": "assets/icon/icon_256.ico",
+      "target": [
+        "squirrel"
+      ]
+    },
+    "squirrelWindows": {
+      "iconUrl": "https://raw.githubusercontent.com/thientu995/electron-template-empty/master/favicon.ico"
+    },
+    "linux": {
+      "icon": "assets/icon/icon_256.ico",
+      "target": [
+        "deb"
+      ]
+    }
+  },
+  "devDependencies": {
+    "electron": "^9.0.2",
+    "electron-builder": "^22.7.0",
+    "electron-builder-squirrel-windows": "^22.7.0"
+  },
+  "dependencies": {
+    "asar": "^3.0.3",
+    "electron-notarize": "^1.0.0",
+    "javascript-obfuscator": "^1.1.0",
+    "js-beautify": "^1.11.0",
+    "mini-css": "^1.0.3",
+    "recursive-readdir": "^2.2.2",
+    "rimraf": "^3.0.2"
+  }
+}
