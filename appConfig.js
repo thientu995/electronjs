@@ -1,25 +1,27 @@
 module.exports = class AppConfig {
     constructor() {
-        this.glob = require('glob');
-        this.path = require('path');
-        this.setConfigValueCommon();
-        this.setPath();
         try {
+            this.glob = require('glob');
+            this.path = require('path');
+            this.setConfigValueCommon();
+            this.setPath();
             this.setModuleElectron();
             this.setModule();
             if (this.remote) {
                 this.setConfigValueRender();
-                this.setModuleRenderer();
             }
             else {
                 this.setConfigValueMain();
             }
-        } catch{ }
+        }
+        catch (err) {
+            console.error(err);
+        }
     }
 
     setConfigValueCommon() {
         this.IsDebug = /--debug/.test(process.argv[2]);
-        this.HomePageUpdate = 'http://electron-template-empty-442dazr6l.now.sh';
+        this.HomePageUpdate = 'http://electron-template-empty.now.sh';
         this.NameMainWindow = 'MainWindow';
     }
 
@@ -64,9 +66,5 @@ module.exports = class AppConfig {
             let key = this.path.basename(this.path.dirname(file));
             this[key] = require(file);
         });
-    }
-
-    setModuleRenderer() {
-        // Import module render (jquery, angualrjs,...)
     }
 }
