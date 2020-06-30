@@ -28,24 +28,35 @@ module.exports = class CreateWindow extends require('../appConfig') {
 
     createFileMain() {
         const content = `
-module.exports = class ${this.fileName} {
-    constructor(main) {
-        this.main = main;
-        return this[this.constructor.name];
-    }
-}`;
+        module.exports = class ${this.fileName} {
+            constructor(main) {
+                this.main = main;
+                return this.init();
+            }
+
+            init(){
+                if (this[this.constructor.name]) {
+                    return this[this.constructor.name];
+                }
+                const BrowserWindow = this.main.BrowserWindow;
+                let window = new BrowserWindow();
+                window.loadFile(this.main.path.join(__dirname, './index.html'));
+
+                return this[this.constructor.name] = window;
+            }
+        }`;
         this.createFile(this.path.join(this.pathWindow, this.fileMain), js(content));
     }
 
     createFileRenderer() {
         const content = `
-class ${this.fileName} extends require('../../renderers') {
-    constructor(render) {
-        super();
-    }
-}
-module.exports = new ${this.fileName}();
-`;
+        class ${this.fileName} extends require('../../renderers') {
+            constructor() {
+                super();
+            }
+        }
+        module.exports = new ${this.fileName}();
+        `;
         this.createFile(this.path.join(this.pathWindow, this.fileRenderder), js(content));
     }
 

@@ -3,4 +3,9 @@ const cmdRun = params[0];
 const createName = params[1];
 const fileRequire = require('./' + cmdRun);
 
-new fileRequire(createName);
+class ScriptSys extends fileRequire {
+    constructor() {
+        super(createName);
+    }
+}
+new ScriptSys();
