@@ -4,6 +4,5 @@
 }
 
 .noMoveForm, .noMoveForm > * {
-    -webkit-user-select: auto;
     -webkit-app-region: no-drag;
 }
