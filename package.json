@@ -27,7 +27,7 @@
     "build:linux": "electron-builder --linux",
     "build:mac": "electron-builder --mac",
     "build:all": "electron-builder -wm",
-    "sys": "node scriptSys"
+    "project": "node scriptSys"
   },
   "postinstall": "electron-builder install-app-deps",
   "build": {
